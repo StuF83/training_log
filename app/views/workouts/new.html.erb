@@ -1,0 +1,27 @@
+<% if @workout.errors.any? %>
+    <p>The following erros are present</p>
+    <% @workout.errors.full_messages.each do |message| %>
+        <%= message %>
+    <% end %>
+<% end %>
+
+<%= form_with model: @workout do |form| %>
+    <div>
+        <%= form.label :workout_type %>
+        <%= form.text_field :workout_type %>
+    </div>
+    <div>
+        <%= form.label :duration %>
+        <%= form.number_field :duration, min: 1, step: 1 %>
+    </div>
+    <div>
+        <%= form.label :intensity %>
+        <%= form.select :intensity, Workout::INTENSITY.map { |intensity| [intensity.capitalize, intensity] }, {prompt: 'Please select an intensity'} %>
+    </div>
+    <div>
+        <%= form.hidden_field :date, :value=> Date.today %>
+    </div>
+    <div>
+        <%= form.submit %>
+    </div>
+<% end %>
