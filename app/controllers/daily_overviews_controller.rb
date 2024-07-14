@@ -1,0 +1,3 @@
+class DailyOverviewsController < ApplicationController
+  
+end
